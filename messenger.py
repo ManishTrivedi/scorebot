@@ -46,7 +46,8 @@ def getFixture(request):
 
 actions = {
     'send' : send,
-    'getScore' : getScore
+    'getScore' : getScore,
+    'getFixture' : getFixture
 }   
 
 client = Wit(access_token='REPASDYTEYYSAPQ5477TGMP7VZ2KHDRX', actions=actions)
