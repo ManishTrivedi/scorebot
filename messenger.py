@@ -12,13 +12,13 @@ app = Flask(__name__)
 PAGE_ACCESS_TOKEN = "EAAR9DLZC03VoBADAV7pIUYkYp3yuZB1T53S6ZB7p6UNEmGwg3vN6vJyhPovs5JEi4NAysrVsAVpXc5ZCyWp3cOyydFUc5INmyLXrV1ZBkNvcKKyPbdenl587454dxDG93FEyEWNNhtMquPxUiCEkv7IXu5lZCBlaGaeKRIvpH8nwZDZD"
 #Verification token which we mention when giving the url 
 VERIFY_TOKEN='secret' 
-
+ID=''
 
 ############ WIT LOGIC ####################
 
 def send(request, response):
     recepient_id = request['session_id']
-    send_message(recepient_id, str(response['text']))
+    send_message(ID, str(response['text']))
 
 def getScore(request):
     print(request)
@@ -51,9 +51,9 @@ actions = {
 
 client = Wit(access_token='REPASDYTEYYSAPQ5477TGMP7VZ2KHDRX', actions=actions)
 
-def parse_text(sender_id, text):
+def parse_text(text):
     context0={}
-    client.run_actions(sender_id, text, context0) 
+    client.run_actions('session1', text, context0) 
 
 #############################################################
 
@@ -112,10 +112,11 @@ def handle_incoming_messages():
                 if messaging_event.get("message"):  # someone sent us a message
 
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
+                    ID = sender_id
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
-                    parse_text(sender_id, message_text)
+                    parse_text(message_text)
                     #send_message(sender_id, wit_response)
 
                 if messaging_event.get("delivery"):  # delivery confirmation
