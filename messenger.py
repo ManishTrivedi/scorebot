@@ -34,6 +34,15 @@ def getScore(request):
     print(context)
     return context
 
+def getFixture(request):
+    print(request)
+    context = request['context']
+    entities = request['entities']
+
+    context['game'] = 'Next game is vs Arsenal'
+    #print(context)
+    return context    
+
 
 actions = {
     'send' : send,
