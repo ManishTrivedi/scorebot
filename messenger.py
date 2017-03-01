@@ -3,6 +3,8 @@ import os
 import json
 import sys
 import requests
+#from wit_client import parse_text
+from wit import Wit
  
 app = Flask(__name__)
 
@@ -10,6 +12,41 @@ app = Flask(__name__)
 PAGE_ACCESS_TOKEN = "EAAR9DLZC03VoBADAV7pIUYkYp3yuZB1T53S6ZB7p6UNEmGwg3vN6vJyhPovs5JEi4NAysrVsAVpXc5ZCyWp3cOyydFUc5INmyLXrV1ZBkNvcKKyPbdenl587454dxDG93FEyEWNNhtMquPxUiCEkv7IXu5lZCBlaGaeKRIvpH8nwZDZD"
 #Verification token which we mention when giving the url 
 VERIFY_TOKEN='secret' 
+
+
+############ WIT LOGIC ####################
+
+def send(request, response):
+    recepient_id = request['session_id']
+    send_message(recepient_id, response)
+
+def getScore(request):
+    print(request)
+    context = request['context']
+    entities = request['entities']
+
+    if not entities.get('intent', None):
+        context['missingIntent'] = True
+    elif entities.get('teamname', None):
+        context['result'] = '2-1'
+    else:
+        context['missingTeam'] = True   
+    print(context)
+    return context
+
+
+actions = {
+    'send' : send,
+    'getScore' : getScore
+}   
+
+client = Wit(access_token='REPASDYTEYYSAPQ5477TGMP7VZ2KHDRX', actions=actions)
+
+def parse_text(sender_id, text):
+    context0={}
+    client.run_actions(sender_id, text, context0) 
+
+#############################################################
 
 @app.route('/man/', methods=['GET'])
 def test():
@@ -69,7 +106,8 @@ def handle_incoming_messages():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
-                    send_message(sender_id, "got it, thanks!")
+                    parse_text(sender_id, message_text)
+                    #send_message(sender_id, wit_response)
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
