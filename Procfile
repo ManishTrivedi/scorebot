@@ -1,1 +1,1 @@
-web: python messenger.py
+web: gunicorn app:app

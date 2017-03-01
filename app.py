@@ -83,4 +83,4 @@ def log(message):  # simple wrapper for logging to stdout on heroku
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8000))
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=port, debug=True)
