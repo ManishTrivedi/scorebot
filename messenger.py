@@ -6,13 +6,16 @@ import requests
  
 app = Flask(__name__)
 
+#This is the access token we get when we create the bot
 PAGE_ACCESS_TOKEN = "EAAR9DLZC03VoBADAV7pIUYkYp3yuZB1T53S6ZB7p6UNEmGwg3vN6vJyhPovs5JEi4NAysrVsAVpXc5ZCyWp3cOyydFUc5INmyLXrV1ZBkNvcKKyPbdenl587454dxDG93FEyEWNNhtMquPxUiCEkv7IXu5lZCBlaGaeKRIvpH8nwZDZD"
+#Verification token which we mention when giving the url 
 VERIFY_TOKEN='secret' 
 
 @app.route('/man/', methods=['GET'])
 def test():
     return "Hello Manish", 200
 
+#method that handles verification from facebook
 @app.route('/', methods=['GET'])
 def handle_verification():
     # when the endpoint is registered as a webhook, it must echo back
@@ -24,7 +27,7 @@ def handle_verification():
 
     return "Hello world", 200
   
- 
+#Respond back to facebook messenger
 def send_message(recipient_id, message_text):
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
 
@@ -47,7 +50,7 @@ def send_message(recipient_id, message_text):
         log(r.status_code)
         log(r.text)
  
- 
+#Receive messages from fb messenger 
 @app.route('/', methods=['POST'])
 def handle_incoming_messages():
     # endpoint for processing incoming messaging events
