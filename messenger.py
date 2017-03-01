@@ -21,7 +21,7 @@ def send(request, response):
     send_message(ID, str(response['text']))
 
 def getScore(request):
-    print(request)
+    print('In score')
     context = request['context']
     entities = request['entities']
 
@@ -31,11 +31,11 @@ def getScore(request):
         context['result'] = '2-1'
     else:
         context['missingTeam'] = True   
-    print(context)
+    #print(context)
     return context
 
 def getFixture(request):
-    print(request)
+    print('In fixture')
     context = request['context']
     entities = request['entities']
 
@@ -51,10 +51,6 @@ actions = {
 }   
 
 client = Wit(access_token='REPASDYTEYYSAPQ5477TGMP7VZ2KHDRX', actions=actions)
-
-def parse_text(text):
-    context0={}
-    client.run_actions('session1', text, context0) 
 
 #############################################################
 
@@ -103,7 +99,7 @@ def handle_incoming_messages():
     # endpoint for processing incoming messaging events
 
     data = request.get_json()
-    log(data)  # you may not want to log every incoming message in production, but it's good for testing
+    #log(data)  # you may not want to log every incoming message in production, but it's good for testing
 
     if data["object"] == "page":
 
@@ -118,7 +114,9 @@ def handle_incoming_messages():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
-                    parse_text(message_text)
+                    context0={}
+                    context1 = client.run_actions('session1', text, context0)
+                    print("{0} is context after run actions".format(context1))
                     #send_message(sender_id, wit_response)
 
                 if messaging_event.get("delivery"):  # delivery confirmation
