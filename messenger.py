@@ -12,7 +12,7 @@ app = Flask(__name__)
 PAGE_ACCESS_TOKEN = "EAAR9DLZC03VoBADAV7pIUYkYp3yuZB1T53S6ZB7p6UNEmGwg3vN6vJyhPovs5JEi4NAysrVsAVpXc5ZCyWp3cOyydFUc5INmyLXrV1ZBkNvcKKyPbdenl587454dxDG93FEyEWNNhtMquPxUiCEkv7IXu5lZCBlaGaeKRIvpH8nwZDZD"
 #Verification token which we mention when giving the url 
 VERIFY_TOKEN='secret' 
-ID=424291117918611
+ID=''
 
 ############ WIT LOGIC ####################
 
@@ -113,6 +113,8 @@ def handle_incoming_messages():
                 if messaging_event.get("message"):  # someone sent us a message
 
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
+                    global ID
+                    ID=sender_id
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
