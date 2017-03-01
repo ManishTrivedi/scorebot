@@ -18,7 +18,7 @@ VERIFY_TOKEN='secret'
 
 def send(request, response):
     recepient_id = request['session_id']
-    send_message(recepient_id, response)
+    send_message(recepient_id, response['text'])
 
 def getScore(request):
     print(request)
