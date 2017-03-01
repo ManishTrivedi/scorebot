@@ -12,7 +12,7 @@ app = Flask(__name__)
 PAGE_ACCESS_TOKEN = "EAAR9DLZC03VoBADAV7pIUYkYp3yuZB1T53S6ZB7p6UNEmGwg3vN6vJyhPovs5JEi4NAysrVsAVpXc5ZCyWp3cOyydFUc5INmyLXrV1ZBkNvcKKyPbdenl587454dxDG93FEyEWNNhtMquPxUiCEkv7IXu5lZCBlaGaeKRIvpH8nwZDZD"
 #Verification token which we mention when giving the url 
 VERIFY_TOKEN='secret' 
-ID='424291117918611'
+ID=424291117918611
 
 ############ WIT LOGIC ####################
 
@@ -39,7 +39,7 @@ def getFixture(request):
     context = request['context']
     entities = request['entities']
 
-    context['game'] = 'Next game is vs Arsenal'
+    context['game'] = 'Arsenal'
     #print(context)
     return context    
 
