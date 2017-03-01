@@ -6,7 +6,7 @@ import requests
  
 app = Flask(__name__)
 
-ACCESS_TOKEN = "EAAR9DLZC03VoBADAV7pIUYkYp3yuZB1T53S6ZB7p6UNEmGwg3vN6vJyhPovs5JEi4NAysrVsAVpXc5ZCyWp3cOyydFUc5INmyLXrV1ZBkNvcKKyPbdenl587454dxDG93FEyEWNNhtMquPxUiCEkv7IXu5lZCBlaGaeKRIvpH8nwZDZD"
+PAGE_ACCESS_TOKEN = "EAAR9DLZC03VoBADAV7pIUYkYp3yuZB1T53S6ZB7p6UNEmGwg3vN6vJyhPovs5JEi4NAysrVsAVpXc5ZCyWp3cOyydFUc5INmyLXrV1ZBkNvcKKyPbdenl587454dxDG93FEyEWNNhtMquPxUiCEkv7IXu5lZCBlaGaeKRIvpH8nwZDZD"
  
 @app.route('/man/', methods=['GET'])
 def test():
@@ -24,11 +24,11 @@ def handle_verification():
     return "Hello world", 200
   
  
-def send_message(user_id, msg):
+def send_message(recipient_id, message_text):
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
 
     params = {
-        "access_token": os.environ["PAGE_ACCESS_TOKEN"]
+        "access_token": PAGE_ACCESS_TOKEN
     }
     headers = {
         "Content-Type": "application/json"
